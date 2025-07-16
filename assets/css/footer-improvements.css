@@ -1,0 +1,107 @@
+/* Footer Improvements - Horizontal Quick Links */
+
+/* Make Quick Links display horizontally */
+.footer-links-column:first-child .footer-links {
+    display: flex !important;
+    flex-direction: row !important; /* Changed from column to row */
+    flex-wrap: wrap;
+    gap: 0.8rem !important;
+    justify-content: flex-start;
+}
+
+.footer-links-column:first-child .footer-links l {
+    margin-right: 0.5rem;
+    margin-bottom: 0.5rem;
+    display: inline-block;
+}
+
+.footer-links-column:first-child .footer-links l a {
+    /* Remove button-like styling */
+    color: rgba(255, 255, 255, 0.7);
+    padding: 2px 0 !important;
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.footer-links-column:first-child .footer-links l a:hover {
+    color: var(--secondary, #f9e79f);
+    transform: translateY(-3px) !important;
+}
+
+/* Add separator between links */
+.footer-links-column:first-child .footer-links l:not(:last-child)::after {
+    content: '|';
+    color: rgba(255, 255, 255, 0.3);
+    margin-left: 0.5rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 992px) {
+    .footer-links-column:first-child .footer-links {
+        justify-content: center;
+    }
+}
+
+@media (max-width: 768px) {
+    .footer-links-column:first-child .footer-links {
+        padding: 0 1rem;
+        gap: 0.5rem !important;
+    }
+    
+    .footer-links-column:first-child .footer-links l:not(:last-child)::after {
+        margin-left: 0.4rem;
+    }
+    
+    /* Better touch target sizes for mobile */
+    .footer-links-column:first-child .footer-links l a {
+        padding: 5px 0 !important;
+        display: inline-block;
+    }
+    
+    /* Use active state for mobile instead of hover */
+    .footer-links-column:first-child .footer-links l a:active {
+        color: var(--secondary, #f9e79f);
+        transform: translateY(-2px) !important;
+        transition: all 0.2s ease;
+    }
+}
+
+@media (max-width: 576px) {
+    .footer-links-column:first-child .footer-links {
+        flex-direction: row !important;
+        flex-wrap: wrap;
+        gap: 0.6rem !important;
+        justify-content: center;
+        width: 100%;
+    }
+    
+    .footer-links-column:first-child .footer-links l {
+        margin-right: 0.3rem;
+        margin-bottom: 0.4rem;
+    }
+    
+    .footer-links-column:first-child .footer-links l a {
+        font-size: 0.85rem;
+    }
+    
+    /* Hide separator on mobile for cleaner look */
+    .footer-links-column:first-child .footer-links l:not(:last-child)::after {
+        display: none;
+    }
+}
+
+/* Extra small devices (under 400px) */
+@media (max-width: 400px) {
+    .footer-links-column:first-child .footer-links {
+        gap: 0.4rem !important;
+    }
+    
+    .footer-links-column:first-child .footer-links l {
+        margin-right: 0.2rem;
+        margin-bottom: 0.3rem;
+    }
+    
+    .footer-links-column:first-child .footer-links l a {
+        font-size: 0.8rem;
+    }
+} 

@@ -1,0 +1,692 @@
+/* New Modern Product Section Design
+-------------------------------------------------- */
+
+/* Main Product Section Styles */
+.product-section-new {
+  background: linear-gradient(135deg, #f8fafc 0%, #edf2f7 100%);
+  padding: 1.5rem 0 2rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.product-section-new::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: white !important;
+
+  z-index: 0;
+}
+
+/* Section Title Redesign */
+.product-section-new .section-title {
+  position: relative;
+  margin-bottom: 2rem;
+}
+
+.product-section-new .headline-text {
+  color: #1A3C40;
+  position: relative;
+  display: inline-block;
+  font-weight: 800;
+  padding-bottom: 0.4rem;
+  letter-spacing: -0.02em;
+}
+
+.product-section-new .headline-text::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 4px;
+  background: linear-gradient(90deg, #1A3C40, #2A5C60);
+  border-radius: 10px;
+}
+
+/* Product Grid Container */
+.product-grid-new {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 1rem;
+  position: relative;
+  z-index: 1;
+}
+
+/* Optimized laptop view - 3 or 4 columns depending on screen size */
+@media (min-width: 1200px) {
+  .product-grid-new {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.2rem;
+    max-width: 1400px;
+    margin: 0 auto;
+    background-color: #ffffff;
+  }
+}
+
+@media (min-width: 992px) and (max-width: 1199px) {
+  .product-grid-new {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.2rem;
+    background-color: white;
+  }
+}
+
+/* Product Card Redesign */
+.product-card-new {
+  position: relative;
+  background: #ffffff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.05);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.product-card-new.hover,
+.product-card-new:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+  background: linear-gradient(135deg, #1A3C40, #2A5C60);
+  color: white;
+}
+
+/* Card Image Container */
+.product-image-new {
+  position: relative;
+  width: 100%;
+  height: 160px;
+  overflow: hidden;
+}
+
+/* Optimize image height for laptop screens */
+@media (min-width: 992px) {
+  .product-image-new {
+    height: 180px;
+  }
+}
+
+.product-image-new img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s;
+}
+
+.product-card-new.hover .product-image-new img,
+.product-card-new:hover .product-image-new img {
+  transform: scale(1.08);
+}
+
+/* Image Overlay with Category Tag */
+.product-category-tag {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: rgba(26, 60, 64, 0.85);
+  color: #ffffff;
+  padding: 6px 12px;
+  border-radius: 30px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  backdrop-filter: blur(3px);
+  z-index: 2;
+  transition: all 0.4s ease;
+}
+
+.product-card-new.hover .product-category-tag,
+.product-card-new:hover .product-category-tag {
+  background: rgba(255, 255, 255, 0.85);
+  color: #1A3C40;
+  box-shadow: 0 4px 8px rgba(255, 255, 255, 0.25);
+}
+
+/* Card Content */
+.product-content-new {
+  display: flex;
+  flex-direction: column;
+  padding: 0.8rem;
+  flex-grow: 1;
+  background: #ffffff;
+  transition: background 0.4s ease;
+}
+
+/* Optimize padding for laptop */
+@media (min-width: 992px) {
+  .product-content-new {
+    padding: 1rem;
+  }
+}
+
+.product-card-new.hover .product-content-new,
+.product-card-new:hover .product-content-new {
+  background: transparent;
+}
+
+.product-title-new {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #1A3C40;
+  margin-bottom: 0.3rem;
+  line-height: 1.3;
+  transition: color 0.4s ease;
+}
+
+.product-card-new.hover .product-title-new,
+.product-card-new:hover .product-title-new {
+  color: white;
+}
+
+/* Product description should be fully visible */
+.product-description-new {
+  font-size: 0.85rem;
+  line-height: 1.5;
+  color: #4a5568;
+  margin-bottom: 0.6rem;
+  flex-grow: 1;
+  transition: color 0.4s ease;
+  /* Remove truncation styles */
+  -webkit-line-clamp: unset;
+  display: block;
+  -webkit-box-orient: unset;
+  overflow: visible;
+  text-overflow: unset;
+  max-height: none;
+}
+
+.product-card-new.hover .product-description-new,
+.product-card-new:hover .product-description-new {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+/* Product Features/Specs */
+.product-features-new {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+  margin-bottom: 0.6rem;
+}
+
+.feature-tag {
+  background: #e6f0f1;
+  color: #1A3C40;
+  padding: 3px 6px;
+  border-radius: 4px;
+  font-size: 0.7rem;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  transition: all 0.4s ease;
+}
+
+.feature-tag::before {
+  content: '';
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  background-color: #1A3C40;
+  border-radius: 50%;
+  margin-right: 6px;
+  transition: background-color 0.4s ease;
+}
+
+.product-card-new.hover .feature-tag,
+.product-card-new:hover .feature-tag {
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+}
+
+.product-card-new.hover .feature-tag::before,
+.product-card-new:hover .feature-tag::before {
+  background-color: white;
+}
+
+/* Card Footer with Action Button */
+.product-footer-new {
+  display: none;
+}
+
+.product-btn-new {
+  display: none;
+}
+
+/* Product Filters */
+.product-filters-new {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.filter-btn {
+  background: rgba(255, 255, 255, 0.8);
+  border: 1px solid #e2e8f0;
+  padding: 0.5rem 1rem;
+  border-radius: 50px;
+  font-size: 0.9rem;
+  color: #4a5568;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin: 0 0.2rem;
+}
+
+.filter-btn:hover {
+  background: white;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.filter-btn.active {
+  background: #1A3C40;
+  color: white;
+  border-color: #1A3C40;
+  box-shadow: 0 4px 10px rgba(26, 60, 64, 0.2);
+}
+
+/* Highlight Card (Featured Product) */
+.product-card-featured {
+  grid-column: span 2;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  background: linear-gradient(135deg, #1A3C40, #2A5C60);
+  color: white;
+}
+
+/* Adjust featured card for laptop screens */
+@media (min-width: 992px) {
+  .product-card-featured {
+    grid-column: span 2;
+    height: auto;
+  }
+}
+
+.product-card-featured .product-image-new {
+  height: 100%;
+}
+
+.product-card-featured .product-content-new {
+  background: transparent;
+  padding: 1.2rem;
+}
+
+.product-card-featured .product-title-new {
+  font-size: 1.5rem;
+  color: white;
+}
+
+.product-card-featured .product-description-new {
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 0.95rem;
+}
+
+.product-card-featured .feature-tag {
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+}
+
+.product-card-featured .feature-tag::before {
+  background-color: white;
+}
+
+.product-card-featured .product-btn-new {
+  background: white;
+  color: #1A3C40;
+}
+
+.product-card-featured .product-btn-new:hover {
+  background: #f7fafc;
+}
+
+/* Make sure featured card doesn't change on hover since it already has the right styles */
+.product-card-featured:hover {
+  transform: translateY(-12px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+}
+
+/* Animation Effects */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.product-card-new {
+  animation: fadeInUp 0.5s ease forwards;
+  opacity: 0;
+}
+
+/* Hide Load More Container */
+.load-more-container {
+  display: none;
+}
+
+/* Quick View buttons should be removed */
+.quick-view-btn {
+  display: none;
+}
+
+/* Touch Device Improvements for Product Cards */
+@media (hover: hover) {
+  /* Only apply hover styles on devices that can hover */
+  .product-card-new:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+    background: linear-gradient(135deg, #1A3C40, #2A5C60);
+    color: white;
+  }
+  
+  .product-card-new:hover .product-image-new img {
+    transform: scale(1.08);
+  }
+  
+  .product-card-new:hover .product-content-new {
+    background: transparent;
+  }
+  
+  .product-card-new:hover .product-title-new,
+  .product-card-new:hover .product-description-new {
+    color: white;
+  }
+  
+  .product-card-new:hover .product-btn-new {
+    background: white;
+    color: #1A3C40;
+  }
+  
+  .product-card-new:hover .feature-tag {
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+  }
+}
+
+/* Active styles for touch devices */
+@media (hover: none) {
+  .product-card-new.active,
+  .product-card-new:active {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    transition: all 0.2s ease;
+  }
+}
+
+/* Even better responsive grid */
+@media (max-width: 1200px) {
+  .product-grid-new {
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 1rem;
+    border-color: white;
+  }
+}
+
+@media (max-width: 992px) {
+  .product-section-new {
+    padding: 2rem 0 2.5rem;
+  }
+  
+  .product-card-featured .product-image-new {
+    height: 200px;
+  }
+  
+  /* Featured card goes full width on tablets */
+  .product-card-featured {
+    grid-column: 1 / -1;
+    grid-template-columns: 1fr;
+  }
+  
+  .product-card-featured .product-image-new {
+    height: 200px;
+  }
+}
+
+@media (max-width: 768px) {
+  .product-grid-new {
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 0.8rem;
+  }
+  
+  .product-image-new {
+    height: 140px;
+  }
+  
+  /* Improve filter buttons on mobile */
+  .product-filters-new {
+    gap: 0.3rem;
+    flex-wrap: wrap;
+    padding: 0 0.5rem;
+  }
+  
+  .filter-btn {
+    font-size: 0.8rem;
+    padding: 0.4rem 0.7rem;
+    white-space: nowrap;
+  }
+}
+
+@media (max-width: 576px) {
+  .product-section-new {
+    padding: 1.5rem 0;
+  }
+  
+  .product-grid-new {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.8rem;
+  }
+  
+  .product-image-new {
+    height: 130px;
+  }
+  
+  .product-title-new {
+    font-size: 0.9rem;
+  }
+  
+  .product-description-new {
+    font-size: 0.75rem;
+    margin-bottom: 0.6rem;
+    /* Remove these truncation styles */
+    -webkit-line-clamp: unset;
+    max-height: none;
+    overflow: visible;
+  }
+  
+  .feature-tag {
+    font-size: 0.65rem;
+    padding: 2px 5px;
+  }
+  
+  /* Remove product button styles since we're hiding it */
+  .product-btn-new {
+    display: none;
+  }
+  
+  /* Single column for featured card on mobile */
+  .product-card-featured {
+    grid-column: span 2;
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Extra Small Devices */
+@media (max-width: 400px) {
+  .product-grid-new {
+    grid-template-columns: 1fr;
+  }
+  
+  .product-card-featured {
+    grid-column: 1;
+  }
+  
+  .product-image-new {
+    height: 160px;
+  }
+  
+  /* Adjust filter buttons for very small screens */
+  .filter-btn {
+    padding: 0.3rem 0.6rem;
+    font-size: 0.75rem;
+  }
+  
+  .product-filters-new {
+    margin-bottom: 1.5rem;
+  }
+}
+
+/* Feature marquee - Why Choose Our Thread section */
+.feature-marquee-container {
+  min-height: 380px;
+  padding: 70px 20px;
+  position: relative;
+  background-color: #f8fafc;
+  overflow: hidden;
+}
+
+.infinite-marquee {
+  display: flex;
+  justify-content: flex-start;
+  gap: 1.5rem;
+  width: 100%;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  position: relative;
+}
+
+.infinite-marquee::-webkit-scrollbar {
+  display: none;
+}
+
+.feature-block {
+  min-width: 210px;
+  max-width: 230px;
+  height: 160px;
+  background: white;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.05);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  flex-shrink: 0;
+  cursor: pointer;
+  user-select: none;
+  text-align: center;
+  min-height: 160px;
+}
+
+.feature-block:hover,
+.feature-block:focus {
+  transform: translateY(-15px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+  background: linear-gradient(135deg, #1A3C40, #2A5C60);
+  color: white;
+}
+
+.feature-icon {
+  font-size: 2.8rem;
+  margin-bottom: 0.6rem;
+  color: #1A3C40;
+  transition: all 0.4s ease;
+}
+
+.feature-block:hover .feature-icon,
+.feature-block:focus .feature-icon {
+  color: white;
+}
+
+.feature-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #1A3C40;
+  transition: all 0.4s ease;
+}
+
+.feature-block:hover .feature-title,
+.feature-block:focus .feature-title {
+  color: white;
+}
+
+.feature-gradient-left, .feature-gradient-right {
+  position: absolute;
+  top: 0;
+  width: 80px;
+  height: 100%;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.feature-gradient-left {
+  left: 0;
+  background: linear-gradient(90deg, #f8fafc 0%, rgba(248, 250, 252, 0) 100%);
+}
+
+.feature-gradient-right {
+  right: 0;
+  background: linear-gradient(270deg, #f8fafc 0%, rgba(248, 250, 252, 0) 100%);
+}
+
+.feature-marquee-arrows {
+  display: flex;
+  justify-content: center;
+  margin-top: 1.5rem;
+  gap: 1rem;
+}
+
+.feature-marquee-arrow-left,
+.feature-marquee-arrow-right {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: white;
+  color: #1A3C40;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.07);
+  border: none;
+}
+
+.feature-marquee-arrow-left:hover,
+.feature-marquee-arrow-right:hover {
+  background: #1A3C40;
+  color: white;
+  box-shadow: 0 6px 15px rgba(26, 60, 64, 0.2);
+  transform: translateY(-3px);
+}
+
+/* Laptop/desktop optimization */
+@media (min-width: 992px) {
+  .feature-block {
+    min-width: 230px;
+    max-width: 250px;
+    height: 180px;
+    min-height: 180px;
+  }
+  
+  .feature-icon {
+    font-size: 3.2rem;
+  }
+  
+  .feature-title {
+    font-size: 1.35rem;
+  }
+} 
