@@ -1,0 +1,28 @@
+[
+    {
+        "order_id": "ST202507169205",
+        "order_date": "2025-07-16 07:29:51",
+        "customer": {
+            "first_name": "jainil",
+            "last_name": "moradiya",
+            "email": "jainilmoradiya@gmail.com",
+            "phone": "9898986565",
+            "address": "Bhavnagar",
+            "city": "bhavnagar",
+            "state": "Gujrat",
+            "pincode": "364004",
+            "country": "India",
+            "notes": ""
+        },
+        "product": {
+            "name": "Technical Thread",
+            "price": "\u20b91,199",
+            "image": "https:\/\/images.unsplash.com\/photo-1465101046530-73398c7f28ca?auto=format&amp;fit=crop&amp;w=600&amp;q=80",
+            "description": "Specially developed for industrial applications with flame retardance and superior durability for demanding environments.",
+            "quantity": "6"
+        },
+        "total_amount": "Total: \u20b97,194",
+        "payment_method": "Cash on Delivery (COD)",
+        "order_status": "Pending"
+    }
+]

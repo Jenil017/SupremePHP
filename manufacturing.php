@@ -201,70 +201,121 @@
   });
 </script>
 
-<!-- WHY CHOOSE SUPREME THREAD SECTION (Modern Card Layout) -->
-<section id="why-choose" class="section_our_solution" style="background: white; padding-top: 2rem; padding-bottom: 2rem; margin-top: 0;">
-  <div class="container">
-    <h2 class="section-title text-center font-bold mb-5" style="color: var(--primary, #1e3a8a); font-size: 2.4rem; margin-top: 0; letter-spacing: 0.01em; text-decoration: underline; padding-bottom: 3rem;">Why Choose Supreme Thread</h2>
-    <div class="row">
-      <div class="col-lg-12 col-md-12 col-sm-12">
-        <div class="our_solution_category">
-          <div class="solution_cards_box">
-            <div class="solution_card">
-              <div class="hover_color_bubble"></div>
-              <div class="so_top_icon">
-                <span class="why-icon-mfg text-4xl mb-3">✨</span>
-              </div>
-              <div class="solu_title">
-                <h3>Durability Tested</h3>
-              </div>
-              <div class="solu_description">
-                <p>Every spool is tested for strength and longevity, ensuring premium quality.</p>
-              </div>
+<!-- START: WHY CHOOSE SUPREME THREAD SECTION -->
+
+<!-- 
+  CSS for the "Why Choose Us" section.
+  For best results, move this to your main stylesheet (e.g., styles.css) 
+-->
+<style>
+.why-choose-supreme-thread {
+    padding: 80px 0;
+    background-color: #f8f9fa; /* A light background to separate the section */
+    font-family: sans-serif;
+}
+
+.why-choose-supreme-thread .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    text-align: center;
+}
+
+.why-choose-supreme-thread h2 {
+    font-size: 2.8rem;
+    margin-bottom: 20px;
+    color: #212529;
+}
+
+.why-choose-supreme-thread .section-subtitle {
+    font-size: 1.1rem;
+    color: #6c757d;
+    max-width: 700px;
+    margin: 0 auto 50px auto;
+}
+
+.features-grid {
+    display: grid;
+    /* Creates a responsive grid that adjusts the number of columns */
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 30px;
+    text-align: left;
+}
+
+.feature-card {
+    background: #ffffff;
+    border-radius: 10px;
+    padding: 35px;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.07);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.feature-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.1);
+}
+
+.feature-card .feature-icon {
+    font-size: 3rem;
+    color: #0d6efd; /* Your brand's primary color */
+    margin-bottom: 20px;
+}
+
+.feature-card h3 {
+    font-size: 1.3rem;
+    color: #343a40;
+    margin-bottom: 15px;
+}
+
+.feature-card p {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #6c757d;
+}
+</style>
+
+<section class="why-choose-supreme-thread">
+    <div class="container">
+        <h2>Why Choose Supreme Thread?</h2>
+        <p class="section-subtitle">
+            Our commitment to excellence is woven into every fiber. Discover the advantages that make Supreme Thread the preferred choice for leading manufacturers worldwide.
+        </p>
+
+        <div class="features-grid">
+            <!-- Feature Card 1: Quality -->
+            <div class="feature-card">
+                <div class="feature-icon">💎</div> <!-- Tip: Replace with an SVG or an icon from a library like Font Awesome -->
+                <h3>Unmatched Quality</h3>
+                <p>Our threads are manufactured using state-of-the-art technology and the finest raw materials, ensuring superior strength, consistency, and durability for any application.</p>
             </div>
-            <div class="solution_card">
-              <div class="hover_color_bubble"></div>
-              <div class="so_top_icon">
-                <span class="why-icon-mfg text-4xl mb-3">🌍</span>
-              </div>
-              <div class="solu_title">
-                <h3>Eco-Friendly Dyes</h3>
-              </div>
-              <div class="solu_description">
-                <p>We use sustainable, safe dyes to protect the planet and your products.</p>
-              </div>
+
+            <!-- Feature Card 2: Color -->
+            <div class="feature-card">
+                <div class="feature-icon">🎨</div>
+                <h3>Vibrant & Lasting Colors</h3>
+                <p>With an extensive and rich color palette, our threads maintain their vibrancy even after numerous washes, ensuring your final products look impeccable for longer.</p>
             </div>
-          </div>
-          <div class="solution_cards_box sol_card_top_3">
-            <div class="solution_card">
-              <div class="hover_color_bubble"></div>
-              <div class="so_top_icon">
-                <span class="why-icon-mfg text-4xl mb-3">⚙️</span>
-              </div>
-              <div class="solu_title">
-                <h3>Precision Winding</h3>
-              </div>
-              <div class="solu_description">
-                <p>Advanced machinery ensures even, flawless winding on every spool.</p>
-              </div>
+
+            <!-- Feature Card 3: Eco-Friendly -->
+            <div class="feature-card">
+                <div class="feature-icon">🌿</div>
+                <h3>Sustainable Practices</h3>
+                <p>We are committed to eco-friendly manufacturing. Our sustainable processes reduce environmental impact without compromising the high quality you expect.</p>
             </div>
-            <div class="solution_card">
-              <div class="hover_color_bubble"></div>
-              <div class="so_top_icon">
-                <span class="why-icon-mfg text-4xl mb-3">🚚</span>
-              </div>
-              <div class="solu_title">
-                <h3>Global Logistics</h3>
-              </div>
-              <div class="solu_description">
-                <p>Efficient shipping and support for clients worldwide, on time every time.</p>
-              </div>
+
+            <!-- Feature Card 4: Reliability -->
+            <div class="feature-card">
+                <div class="feature-icon">🌐</div>
+                <h3>Global & Reliable Supply</h3>
+                <p>Trusted by brands worldwide, our reliable and efficient supply chain ensures you get the threads you need, precisely when you need them, anywhere in the world.</p>
             </div>
-          </div>
         </div>
-      </div>
     </div>
-  </div>
 </section>
+
+<!-- END: WHY CHOOSE SUPREME THREAD SECTION -->
+
+
 
 <!-- PROCESS STEPS SECTION -->
 <section id="process" class="section process-section" style="background: white">
