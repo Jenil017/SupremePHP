@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Buy Now Flow</title>
+    <script>
+        // Simulate Buy Now button click
+        function testBuyNow() {
+            const productData = {
+                name: "Rayon Embroidery Thread",
+                price: "₹899",
+                image: "https://images.unsplash.com/photo-1511367461989-f85a21fda167?auto=format&fit=crop&w=600&q=80",
+                description: "Premium rayon embroidery thread with exceptional luster and color vibrancy for decorative stitches and embroidery."
+            };
+            
+            // Store product data in localStorage
+            localStorage.setItem('selectedProduct', JSON.stringify(productData));
+            
+            // Redirect to order page
+            window.location.href = 'order.php';
+        }
+    </script>
+</head>
+<body>
+    <h1>Test Buy Now Flow</h1>
+    <button onclick="testBuyNow()">Test Buy Now</button>
+</body>
+</html>
