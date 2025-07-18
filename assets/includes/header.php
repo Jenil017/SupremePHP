@@ -37,11 +37,12 @@
             </a>
         <?php else: ?>
             <div class="header-profile-dropdown" style="position:relative;display:inline-block;">
-               <button id="profileBtn" style="background:#2d6a4f;border:none;border-radius:50%;width:44px;height:44px;box-shadow:0 2px 8px rgba(30,58,138,0.10);cursor:pointer;display:flex;align-items:center;justify-content:center; padding: 0;">
+                <button id="profileBtn" style="background:#2d6a4f;border:none;border-radius:50%;width:44px;height:44px;box-shadow:0 2px 8px rgba(30,58,138,0.10);cursor:pointer;display:flex;align-items:center;justify-content:center; padding: 0;">
                     <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'><path d='M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2c0 .55.45 1 1 1h14c.55 0 1-.45 1-1v-2c0-2.66-5.33-4-8-4z'/></svg>" 
                          alt="Profile" 
                          style="width: 24px; height: 24px;"
                     />
+                </button>
                 <div id="profileMenu" style="display:none;position:absolute;right:0;top:54px;background:#fff;border-radius:10px;box-shadow:0 8px 32px rgba(30,58,138,0.12);min-width:160px;z-index:100;">
                     <a href="user_orders.php" style="display:block;padding:12px 20px;color:#1A3C40;text-decoration:none;border-bottom:1px solid #eee;">My Orders</a>
                     <a href="user_feedback.php" style="display:block;padding:12px 20px;color:#1A3C40;text-decoration:none;border-bottom:1px solid #eee;">Feedback</a>

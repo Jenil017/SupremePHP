@@ -1,4 +1,39 @@
-<?php include 'assets/includes/header.php'; ?>
+<?php
+include 'assets/includes/header.php';
+require_once 'database.php';
+
+// --- Database Fetch ---
+// 1. Get Product ID from URL and validate it.
+$product_id = filter_input(INPUT_GET, 'product_id', FILTER_VALIDATE_INT);
+
+// Redirect to the products page if the ID is missing or invalid.
+if (!$product_id) {
+    header('Location: products.php');
+    exit;
+}
+
+// 2. Fetch the selected product's details from the database.
+$stmt = $conn->prepare("SELECT id, name, price, image, description FROM products WHERE id = ?");
+$stmt->bind_param("i", $product_id);
+$stmt->execute();
+$result = $stmt->get_result();
+
+// Redirect if no product is found with the given ID.
+if ($result->num_rows === 0) {
+    header('Location: products.php');
+    exit;
+}
+
+// Store the product details in an associative array.
+$product = $result->fetch_assoc();
+
+// Clean the price for display and calculation, removing any non-numeric characters.
+$clean_price = preg_replace('/[^0-9.]/', '', $product['price']);
+
+$stmt->close();
+$conn->close();
+
+?>
 
 <!-- Order Page Styles -->
 <style>
@@ -316,23 +351,25 @@
             <div class="product-summary">
                 <h3>Order Summary</h3>
                 <div class="product-display">
-                    <img id="product-image" src="" alt="Product Image" class="product-image">
-                    <div id="product-name" class="product-name">Product Name</div>
-                    <div id="product-price" class="product-price">₹0</div>
-                </div>
-                <div id="product-description" class="product-description">
-                    Product description will appear here.
+                    <img id="product-image" src="<?= htmlspecialchars($product['image']) ?>" alt="<?= htmlspecialchars($product['name']) ?>" class="product-image">
+                    <h4 id="product-name" class="product-name"><?= htmlspecialchars($product['name']) ?></h4>
+                    <p id="product-price" class="product-price" data-price="<?= htmlspecialchars($clean_price) ?>">
+                        ₹<?= htmlspecialchars(number_format((float)$clean_price, 2)) ?>
+                    </p>
+                    <p id="product-description" class="product-description">
+                        <?= htmlspecialchars($product['description']) ?>
+                    </p>
                 </div>
                 
                 <div class="quantity-section">
-                    <div class="quantity-label">Quantity:</div>
+                    <label for="quantity" class="quantity-label">Select Quantity:</label>
                     <div class="quantity-controls">
                         <button type="button" class="quantity-btn" onclick="changeQuantity(-1)">-</button>
-                        <input type="number" id="quantity" class="quantity-input" value="1" min="1" max="99" readonly>
+                        <input type="text" id="quantity" name="quantity" value="1" readonly class="quantity-input">
                         <button type="button" class="quantity-btn" onclick="changeQuantity(1)">+</button>
                     </div>
                     <div id="total-price" class="total-price">
-                        Total: ₹0
+                        Total: ₹<?= htmlspecialchars(number_format((float)$clean_price, 2)) ?>
                     </div>
                 </div>
             </div>
@@ -341,6 +378,13 @@
             <div class="order-form">
                 <h3>Shipping Information</h3>
                 <form id="orderForm" action="process_order.php" method="POST">
+                    <!-- Hidden fields for product data, now populated by PHP -->
+                    <input type="hidden" name="product_id" value="<?= htmlspecialchars($product['id']) ?>">
+                    <input type="hidden" name="product_name" value="<?= htmlspecialchars($product['name']) ?>">
+                    <input type="hidden" name="product_price" value="<?= htmlspecialchars($clean_price) ?>">
+                    <input type="hidden" name="product_image" value="<?= htmlspecialchars($product['image']) ?>">
+                    <input type="hidden" name="product_description" value="<?= htmlspecialchars($product['description']) ?>">
+
                     <div class="form-row">
                         <div class="form-group">
                             <label for="firstName">First Name *</label>
@@ -400,14 +444,6 @@
                         <p><strong>Cash on Delivery (COD)</strong> - Pay when you receive your order at your doorstep.</p>
                     </div>
                     
-                    <!-- Hidden fields for product data -->
-                    <input type="hidden" id="productName" name="productName">
-                    <input type="hidden" id="productPrice" name="productPrice">
-                    <input type="hidden" id="productImage" name="productImage">
-                    <input type="hidden" id="productDescription" name="productDescription">
-                    <input type="hidden" id="orderQuantity" name="orderQuantity">
-                    <input type="hidden" id="totalAmount" name="totalAmount">
-                    
                     <button type="submit" class="order-btn">
                         <i class="fas fa-shopping-cart"></i> Confirm Order (Cash on Delivery)
                     </button>
@@ -419,68 +455,37 @@
 
 <!-- Order Page JavaScript -->
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-    // Get product data from localStorage
-    const productData = JSON.parse(localStorage.getItem('selectedProduct'));
-    
-    if (!productData) {
-        alert('No product selected. Redirecting to products page.');
-        window.location.href = 'products_new.php';
-        return;
-    }
-    
-    // Populate product information
-    document.getElementById('product-image').src = productData.image;
-    document.getElementById('product-image').alt = productData.name;
-    document.getElementById('product-name').textContent = productData.name;
-    document.getElementById('product-price').textContent = productData.price;
-    document.getElementById('product-description').textContent = productData.description;
-    
-    // Set hidden form fields
-    document.getElementById('productName').value = productData.name;
-    document.getElementById('productPrice').value = productData.price;
-    document.getElementById('productImage').value = productData.image;
-    document.getElementById('productDescription').value = productData.description;
-    
-    // Calculate initial total
-    updateTotal();
-    
-    // Form submission handling
-    document.getElementById('orderForm').addEventListener('submit', function(e) {
-        e.preventDefault();
-        
-        // Update hidden fields with current values
-        document.getElementById('orderQuantity').value = document.getElementById('quantity').value;
-        document.getElementById('totalAmount').value = document.getElementById('total-price').textContent;
-        
-        // Submit form
-        this.submit();
-    });
-});
-
-function changeQuantity(change) {
+document.addEventListener('DOMContentLoaded', () => {
+    // --- DOM Elements ---
     const quantityInput = document.getElementById('quantity');
-    let currentQuantity = parseInt(quantityInput.value);
-    let newQuantity = currentQuantity + change;
-    
-    if (newQuantity < 1) newQuantity = 1;
-    if (newQuantity > 99) newQuantity = 99;
-    
-    quantityInput.value = newQuantity;
+    const totalPriceDisplay = document.getElementById('total-price');
+    const productPriceEl = document.getElementById('product-price');
+
+    // Get the base price from the data attribute set by PHP
+    const basePrice = parseFloat(productPriceEl.dataset.price);
+
+    // --- Functions ---
+    function updateTotal() {
+        const quantity = parseInt(quantityInput.value, 10);
+        const total = quantity * basePrice;
+        totalPriceDisplay.textContent = `Total: ₹${total.toFixed(2)}`;
+    }
+
+    window.changeQuantity = (amount) => {
+        let currentQuantity = parseInt(quantityInput.value, 10);
+        let newQuantity = currentQuantity + amount;
+
+        // Enforce quantity limits (e.g., 1 to 99)
+        if (newQuantity < 1) newQuantity = 1;
+        if (newQuantity > 99) newQuantity = 99;
+
+        quantityInput.value = newQuantity;
+        updateTotal();
+    };
+
+    // Initial call to set the total price correctly on page load
     updateTotal();
-}
-
-function updateTotal() {
-    const quantity = parseInt(document.getElementById('quantity').value);
-    const priceText = document.getElementById('product-price').textContent;
-    const price = parseInt(priceText.replace('₹', '').replace(',', ''));
-    
-    const total = price * quantity;
-    document.getElementById('total-price').textContent = `Total: ₹${total.toLocaleString()}`;
-}
-
-// Update total when quantity is changed manually
-document.getElementById('quantity').addEventListener('input', updateTotal);
+});
 </script>
 
 <?php include 'assets/includes/footer.php'; ?>
