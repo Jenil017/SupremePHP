@@ -52,12 +52,14 @@ VALUES
 CREATE TABLE IF NOT EXISTS admin (
     id INT AUTO_INCREMENT PRIMARY KEY,
     username VARCHAR(50) NOT NULL,
-    password VARCHAR(255) NOT NULL
+    password VARCHAR(255) NOT NULL,
+    security_question VARCHAR(255) NOT NULL,
+    security_answer VARCHAR(255) NOT NULL
 );
 
 -- Insert dummy admin
-INSERT INTO admin (username, password) VALUES
-('admin', MD5('admin123'));
+INSERT INTO admin (username, password, security_question, security_answer) VALUES
+('admin', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'What is your favorite color?', '$2y$10$E.E883s./y3z1IeA9N.sUe0d2L4p.p9A.F.s3A.b1a.c2d.e3f.g4'); -- Answer: blue
 
 -- Users table for registration/login
 CREATE TABLE IF NOT EXISTS users (
@@ -65,9 +67,21 @@ CREATE TABLE IF NOT EXISTS users (
     name VARCHAR(255) NOT NULL,
     email VARCHAR(255) NOT NULL UNIQUE,
     password VARCHAR(255) NOT NULL,
+    security_question VARCHAR(255) NOT NULL,
+    security_answer VARCHAR(255) NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 -- Insert dummy user
-INSERT INTO users (name, email, password) VALUES
-('Test User', 'user@example.com', MD5('user123'));
+INSERT INTO users (name, email, password, security_question, security_answer) VALUES
+('Test User', 'user@example.com', MD5('user123'), 'What city were you born in?', '$2y$10$E.E883s./y3z1IeA9N.sUe0d2L4p.p9A.F.s3A.b1a.c2d.e3f.g4'); -- Answer: Testville
+
+-- Feedback table for contact form submissions
+CREATE TABLE IF NOT EXISTS feedback (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    email VARCHAR(255) NOT NULL,
+    subject VARCHAR(255) NOT NULL,
+    message TEXT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
